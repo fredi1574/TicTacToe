@@ -1,0 +1,29 @@
+body {
+  background-image: linear-gradient(65deg, pink, lightblue);
+}
+
+#gameContainer {
+  margin: 0 auto;
+  width: 50%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.tile {
+  font-size: 70px;
+  color: white;
+  text-align: center;
+  height: 5rem;
+}
+
+.tile:nth-child(3n + 2) {
+  border-right: 5px solid white;
+  border-left: 5px solid white;
+}
+
+.tile:nth-child(4),
+.tile:nth-child(5),
+.tile:nth-child(6) {
+  border-top: 5px solid white;
+  border-bottom: 5px solid white;
+}

@@ -1,5 +1,6 @@
-body {
+html {
   background-image: linear-gradient(65deg, pink, lightblue);
+  height: 100%;
 }
 
 #gameContainer {
@@ -7,6 +8,16 @@ body {
   width: 50%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+}
+
+#scoreBoard,
+#buttons {
+  color: white;
+  font-size: 60px;
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+  user-select: none;
 }
 
 .tile {

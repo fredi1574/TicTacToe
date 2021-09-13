@@ -3,17 +3,30 @@ html {
   height: 100%;
 }
 
+h1 {
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 70px;
+  -webkit-text-stroke: 1px black;
+}
+
 #gameContainer {
   margin: 0 auto;
   width: 50%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  -webkit-text-stroke: 1px black;
+}
+
+#scoreBoard {
+  -webkit-text-stroke: 1px black;
+  font-size: 70px;
 }
 
 #scoreBoard,
 #buttons {
   color: white;
-  font-size: 60px;
   margin: 0 auto;
   width: 50%;
   text-align: center;
@@ -58,4 +71,23 @@ html {
   100% {
     font-size: 70px;
   }
+}
+
+input {
+  color: white;
+  border: 0px;
+  padding: 15px;
+  font-size: 26px;
+  background-color: rgb(13, 116, 235);
+  transition: 0.3s;
+}
+
+input:hover {
+  background-color: rgb(14, 104, 207);
+  transition: 0.3s;
+}
+
+input:active {
+  background-color: rgb(10, 80, 161);
+  transition: 0.3s;
 }

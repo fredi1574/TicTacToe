@@ -29,11 +29,12 @@ grid.forEach((tile) => {
       let winner = xTurn ? "X" : "O";
       if (xTurn) {
         xScore.textContent++;
+      } else {
+        oScore.textContent++;
       }
-      oScore.textContent++;
-
       alert(winner + " has won!");
       clearBoard();
+      return;
     }
     xTurn = !xTurn;
   });

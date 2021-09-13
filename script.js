@@ -1,28 +1,32 @@
 const grid = document.querySelectorAll(".tile");
 let xScore = document.querySelector("#xScore");
 let oScore = document.querySelector("#oScore");
-let xTurn = true;
 let turnCounter = 0;
 
 grid.forEach((tile) => {
   tile.addEventListener("mouseover", () => {
     if (tile.innerHTML === "") {
-      xTurn
+      turnCounter % 2 == 0
         ? (tile.innerHTML = "<i class='fas fa-times'>")
         : (tile.innerHTML = "<i class='far fa-circle'>");
       tile.classList.add("hoverAnimation");
     }
   });
   tile.addEventListener("click", () => {
-    xTurn ? tile.setAttribute("mark", "X") : tile.setAttribute("mark", "O");
+    if (tile.hasAttribute("mark")) {
+      return;
+    }
+    turnCounter % 2 == 0
+      ? tile.setAttribute("mark", "X")
+      : tile.setAttribute("mark", "O");
     tile.classList.remove("hoverAnimation");
     tile.style.color = "white";
 
     turnCounter++;
 
     if (checkIfWin()) {
-      let winner = xTurn ? "X" : "O";
-      if (xTurn) {
+      let winner = turnCounter % 2 === 1 ? "X" : "O"; //fix this issue
+      if (winner === "X") {
         xScore.textContent++;
       } else {
         oScore.textContent++;
@@ -37,8 +41,6 @@ grid.forEach((tile) => {
       clearBoard();
       return;
     }
-
-    xTurn = !xTurn;
   });
 
   tile.addEventListener("mouseleave", () => {
@@ -82,7 +84,6 @@ document.querySelector("#resetScore").addEventListener("click", () => {
 
 function clearBoard() {
   turnCounter = 0;
-  xTurn = true;
   grid.forEach((tile) => {
     tile.innerHTML = "";
     tile.removeAttribute("mark");

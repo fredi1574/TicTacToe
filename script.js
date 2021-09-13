@@ -1,5 +1,8 @@
 const grid = document.querySelectorAll(".tile");
+let xScore = document.querySelector("#xScore");
+let oScore = document.querySelector("#oScore");
 let xTurn = true;
+let turnCounter = 0;
 
 grid.forEach((tile) => {
   tile.addEventListener("mouseover", () => {
@@ -15,13 +18,20 @@ grid.forEach((tile) => {
     tile.classList.remove("hoverAnimation");
     tile.style.color = "white";
 
+    turnCounter++;
+    if (turnCounter === 9) {
+      alert("Tie!");
+      clearBoard();
+      return;
+    }
+
     if (checkIfWin()) {
       let winner = xTurn ? "X" : "O";
       if (xTurn) {
         xScore.textContent++;
-      } else {
-        oScore.textContent++;
       }
+      oScore.textContent++;
+
       alert(winner + " has won!");
       clearBoard();
     }
@@ -60,9 +70,6 @@ function checkIfWin() {
   return false;
 }
 
-let xScore = document.querySelector("#xScore");
-let oScore = document.querySelector("#oScore");
-
 document.querySelector("#clearBoard").addEventListener("click", clearBoard);
 
 document.querySelector("#resetScore").addEventListener("click", () => {
@@ -71,10 +78,11 @@ document.querySelector("#resetScore").addEventListener("click", () => {
 });
 
 function clearBoard() {
+  turnCounter = 0;
+  xTurn = true;
   grid.forEach((tile) => {
     tile.innerHTML = "";
     tile.removeAttribute("mark");
     tile.style.color = "";
-    xTurn = true;
   });
 }

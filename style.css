@@ -43,7 +43,7 @@ html {
   color: rgba(255, 255, 255, 0.6);
   animation-iteration-count: infinite;
   animation-name: breath;
-  animation-duration: 2s;
+  animation-duration: 1s;
 }
 
 @keyframes breath {

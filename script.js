@@ -65,7 +65,7 @@ function checkIfWin() {
   for (let i = 0; i < winningOptions.length; i++) {
     let [a, b, c] = winningOptions[i];
     if (
-      grid[a].getAttribute("mark") !== null &&
+      grid[a].hasAttribute("mark") &&
       grid[a].getAttribute("mark") === grid[b].getAttribute("mark") &&
       grid[b].getAttribute("mark") === grid[c].getAttribute("mark")
     ) {

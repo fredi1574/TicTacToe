@@ -10,19 +10,26 @@ grid.forEach((tile) => {
       tile.classList.add("hoverAnimation");
     }
   });
-  tile.addEventListener("mousedown", () => {
-    xTurn ? (tile.mark = "X") : (tile.mark = "O");
+  tile.addEventListener("click", () => {
+    xTurn ? tile.setAttribute("mark", "X") : tile.setAttribute("mark", "O");
     tile.classList.remove("hoverAnimation");
-    tile.style.color = "rgb(255,255,255)";
+    tile.style.color = "white";
 
     if (checkIfWin()) {
-      alert("banana");
+      let winner = xTurn ? "X" : "O";
+      if (xTurn) {
+        xScore.textContent++;
+      } else {
+        oScore.textContent++;
+      }
+      alert(winner + " has won!");
+      clearBoard();
     }
     xTurn = !xTurn;
   });
 
   tile.addEventListener("mouseleave", () => {
-    if (tile.mark != "X" && tile.mark != "O") {
+    if (tile.getAttribute("mark") != "X" && tile.getAttribute("mark") != "O") {
       tile.textContent = "";
     }
   });
@@ -40,23 +47,34 @@ function checkIfWin() {
     [2, 4, 6],
   ];
 
-  winningOptions.forEach((option) => {
-    if (grid[option[0]].mark === grid[option[1]].mark && grid[option[2]].mark) {
+  for (let i = 0; i < winningOptions.length; i++) {
+    let [a, b, c] = winningOptions[i];
+    if (
+      grid[a].getAttribute("mark") !== null &&
+      grid[a].getAttribute("mark") === grid[b].getAttribute("mark") &&
+      grid[b].getAttribute("mark") === grid[c].getAttribute("mark")
+    ) {
       return true;
     }
-  });
+  }
+  return false;
 }
 
-document.querySelector("#clearBoard").addEventListener("click", () => {
+let xScore = document.querySelector("#xScore");
+let oScore = document.querySelector("#oScore");
+
+document.querySelector("#clearBoard").addEventListener("click", clearBoard);
+
+document.querySelector("#resetScore").addEventListener("click", () => {
+  xScore.textContent = 0;
+  oScore.textContent = 0;
+});
+
+function clearBoard() {
   grid.forEach((tile) => {
     tile.innerHTML = "";
-    tile.mark = "";
+    tile.removeAttribute("mark");
     tile.style.color = "";
     xTurn = true;
   });
-});
-
-document.querySelector("#resetScore").addEventListener("click", () => {
-  document.querySelector("#xScore").textContent = "0";
-  document.querySelector("#oScore").textContent = "0";
-});
+}

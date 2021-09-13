@@ -19,11 +19,6 @@ grid.forEach((tile) => {
     tile.style.color = "white";
 
     turnCounter++;
-    if (turnCounter === 9) {
-      alert("Tie!");
-      clearBoard();
-      return;
-    }
 
     if (checkIfWin()) {
       let winner = xTurn ? "X" : "O";
@@ -36,6 +31,13 @@ grid.forEach((tile) => {
       clearBoard();
       return;
     }
+
+    if (turnCounter === 9) {
+      alert("Tie!");
+      clearBoard();
+      return;
+    }
+
     xTurn = !xTurn;
   });
 
